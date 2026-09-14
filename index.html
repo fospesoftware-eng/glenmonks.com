@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Glen Monks — Functional Therapist · Mind, Body, Break Free</title>
+<meta name="description" content="Glen Monks is a functional therapist and mind-body coach in Doncaster, England. Holistic testing across the biological, psychological and social dimensions of your life — with yoga, meditation, somatic movement, nutrition and practitioner-grade supplements." />
+<meta property="og:title" content="Glen Monks — Functional Therapist" />
+<meta property="og:description" content="Where the mind and body break free. Holistic, biopsychosocial functional therapy." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/png" href="assets/images/logo-icon.png" />
+<link rel="apple-touch-icon" href="assets/images/logo-icon.png" />
+<link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body data-theme="midnight">
+
+<!-- ===== Grain / atmosphere overlays ===== -->
+<div class="grain" aria-hidden="true"></div>
+<div class="scroll-progress" aria-hidden="true"><span></span></div>
+
+<!-- ===== Custom cursor ===== -->
+<div class="cursor" aria-hidden="true"><div class="cursor__dot"></div><div class="cursor__ring"></div></div>
+
+<!-- ===== Preloader ===== -->
+<div class="preloader" id="preloader" aria-hidden="true">
+  <div class="preloader__inner">
+    <div class="preloader__emblem" aria-hidden="true">
+      <img src="assets/images/logo-emblem.png" alt="" width="140" height="140" />
+      <span class="preloader__emblem-halo"></span>
+    </div>
+    <p class="preloader__eyebrow">Glen Monks</p>
+    <h2 class="preloader__word" aria-hidden="true">
+      <span>b</span><span>r</span><span>e</span><span>a</span><span>k</span><span>&nbsp;</span><span class="italic">free.</span>
+    </h2>
+    <div class="preloader__meta">
+      <span>Mind · Body · Matters</span>
+      <span class="preloader__count"><em id="preCount">0</em></span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Navigation ===== -->
+<header class="nav" id="nav">
+  <a href="#top" class="nav__brand" data-cursor="hover" aria-label="Glen Monks home">
+    <span class="nav__mark" aria-hidden="true">
+      <img class="nav__logo" src="assets/images/logo-emblem.png" alt="" width="44" height="44" />
+    </span>
+    <span class="nav__name">Glen Monks<small>Functional Therapist</small></span>
+  </a>
+  <nav class="nav__links" aria-label="Primary">
+    <a href="#philosophy" data-cursor="hover"><span>Philosophy</span></a>
+    <a href="#practice" data-cursor="hover"><span>Practice</span></a>
+    <a href="#journey" data-cursor="hover"><span>Journey</span></a>
+    <a href="#library" data-cursor="hover"><span>Library</span></a>
+    <a href="#contact" data-cursor="hover"><span>Contact</span></a>
+  </nav>
+  <div class="nav__right">
+    <a class="btn btn--gold btn--sm magnetic" href="https://calendly.com/gmsoulfood" target="_blank" rel="noopener" data-cursor="hover">
+      <span class="btn__label">Book a free call</span>
+    </a>
+    <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false" data-cursor="hover">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ===== Mobile menu ===== -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <nav>
+    <a href="#philosophy"><em>01</em> Philosophy</a>
+    <a href="#practice"><em>02</em> Practice</a>
+    <a href="#journey"><em>03</em> Journey</a>
+    <a href="#library"><em>04</em> Library</a>
+    <a href="#contact"><em>05</em> Contact</a>
+  </nav>
+  <a class="btn btn--gold" href="https://calendly.com/gmsoulfood" target="_blank" rel="noopener"><span class="btn__label">Book a free 30-minute call</span></a>
+  <div class="mobile-menu__foot">
+    <a href="mailto:gmsoulfood@gmail.com">gmsoulfood@gmail.com</a>
+    <span>Doncaster · England</span>
+  </div>
+</div>
+
+<main id="top">
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+    <div class="hero__aurora" aria-hidden="true"></div>
+    <div class="hero__image" data-parallax="0.18" aria-hidden="true">
+      <div class="hero__image-inner"></div>
+    </div>
+    <div class="hero__veil" aria-hidden="true"></div>
+
+    <!-- breathing rings -->
+    <div class="breath" aria-hidden="true">
+      <span class="breath__ring breath__ring--1"></span>
+      <span class="breath__ring breath__ring--2"></span>
+      <span class="breath__ring breath__ring--3"></span>
+      <span class="breath__core"></span>
+    </div>
+
+    <div class="hero__content">
+      <p class="eyebrow hero__eyebrow" data-hero-fade>
+        <span class="pulse-dot"></span>
+        Functional Therapy &amp; Mind–Body Coaching&nbsp;·&nbsp;Doncaster, England
+      </p>
+
+      <h1 class="hero__title">
+        <span class="line"><span class="word" data-split>Where&nbsp;the</span></span>
+        <span class="line"><span class="word" data-split>mind&nbsp;&amp;&nbsp;body</span></span>
+        <span class="line"><span class="word word--accent" data-split>break&nbsp;free.</span></span>
+      </h1>
+
+      <p class="hero__sub" data-hero-fade>
+        Using the latest research in holistic testing, I analyse the
+        <strong>biological</strong>, <strong>psychological</strong> and
+        <strong>social</strong> dimensions of your life — uncovering root causes
+        and charting a calmer, stronger way forward.
+      </p>
+
+      <div class="hero__actions" data-hero-fade>
+        <a class="btn btn--gold magnetic" href="https://calendly.com/gmsoulfood" target="_blank" rel="noopener" data-cursor="hover">
+          <span class="btn__label">Begin — free 30-minute call</span>
+          <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn--ghost magnetic" href="#practice" data-cursor="hover">
+          <span class="btn__label">Explore the practice</span>
+        </a>
+      </div>
+
+      <div class="hero__stats" data-hero-fade>
+        <div class="hero__stat"><strong data-count="20" data-suffix="+">0</strong><span>Years of practice</span></div>
+        <div class="hero__stat"><strong data-count="6">0</strong><span>Integrated disciplines</span></div>
+        <div class="hero__stat"><strong data-count="3">0</strong><span>Countries served</span></div>
+      </div>
+    </div>
+
+    <a class="hero__scroll" href="#philosophy" aria-label="Scroll to philosophy" data-cursor="hover">
+      <span class="hero__scroll-line"><i></i></span>
+      <span>Scroll</span>
+    </a>
+  </section>
+
+  <!-- ===== MARQUEE ===== -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Functional Therapy</span><i>✦</i><span>Somatic Movement</span><i>✦</i><span>Yoga</span><i>✦</i><span>Meditation</span><i>✦</i><span>Primal Nutrition</span><i>✦</i><span>Holistic Lab Testing</span><i>✦</i><span>Mind–Body Coaching</span><i>✦</i>
+      <span>Functional Therapy</span><i>✦</i><span>Somatic Movement</span><i>✦</i><span>Yoga</span><i>✦</i><span>Meditation</span><i>✦</i><span>Primal Nutrition</span><i>✦</i><span>Holistic Lab Testing</span><i>✦</i><span>Mind–Body Coaching</span><i>✦</i>
+    </div>
+  </div>
+
+  <!-- ===== PHILOSOPHY ===== -->
+  <section class="section philosophy" id="philosophy">
+    <div class="section__inner">
+      <div class="philosophy__grid">
+        <div class="philosophy__visual" data-reveal="up">
+          <div class="frame-photo">
+            <img class="frame-photo__img" src="assets/images/glen-monks.webp" alt="Glen Monks, functional therapist, in a wooded setting" data-parallax-img="0.12" width="900" height="1125" />
+            <div class="frame-photo__grain"></div>
+            <div class="frame-photo__badge">
+              <strong>Est. 2005</strong>
+              <span>Two decades of practice</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="philosophy__copy">
+          <p class="eyebrow" data-reveal="up"><span class="eyebrow__num">01</span> The Philosophy</p>
+          <h2 class="h2" data-reveal="up">
+            You are not broken.<br />
+            You are a <em>living system</em><br />
+            waiting to be understood.
+          </h2>
+          <p class="lead" data-reveal="up">
+            Symptoms are messages. Through the lens of the
+            <strong>biopsychosocial model</strong>, every layer of your experience
+            is read together — body chemistry, inner world, and the life that
+            surrounds you — so healing stops being a guessing game.
+          </p>
+
+          <div class="pillars">
+            <article class="pillar" data-reveal="up" data-reveal-delay="0">
+              <span class="pillar__num">B</span>
+              <div>
+                <h3>Biological</h3>
+                <p>Holistic lab analysis, nutrition, movement, sleep and practitioner-grade supplementation.</p>
+              </div>
+            </article>
+            <article class="pillar" data-reveal="up" data-reveal-delay="1">
+              <span class="pillar__num">P</span>
+              <div>
+                <h3>Psychological</h3>
+                <p>Stress responses, thought patterns, trauma and a meditation practice built for real life.</p>
+              </div>
+            </article>
+            <article class="pillar" data-reveal="up" data-reveal-delay="2">
+              <span class="pillar__num">S</span>
+              <div>
+                <h3>Social</h3>
+                <p>Relationships, purpose, environment and the quiet weight — or support — of community.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRACTICE / SERVICES ===== -->
+  <section class="section practice" id="practice">
+    <div class="section__inner">
+      <header class="section__head">
+        <p class="eyebrow" data-reveal="up"><span class="eyebrow__num">02</span> The Practice</p>
+        <h2 class="h2" data-reveal="up">Six disciplines.<br /><em>One coherent path.</em></h2>
+        <p class="lead section__head-sub" data-reveal="up">
+          Each is offered on its own — and all of them speak to each other.
+        </p>
+      </header>
+
+      <div class="services">
+        <article class="service" data-reveal="up" data-tilt data-cursor="hover">
+          <span class="service__num">01</span>
+          <div class="service__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M24 6v36M6 24h36"/><circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="4.5"/></svg>
+          </div>
+          <h3>Functional Therapy &amp; Testing</h3>
+          <p>Advanced holistic lab analysis — including Organic Acids Testing — to decode what your biochemistry is actually saying.</p>
+          <span class="service__line" aria-hidden="true"></span>
+        </article>
+
+        <article class="service" data-reveal="up" data-tilt data-cursor="hover" data-reveal-delay="0">
+          <span class="service__num">02</span>
+          <div class="service__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M8 40c8-14 14-20 32-32-2 16-10 26-24 32"/><path d="M8 40c6-4 12-8 18-14"/><circle cx="34" cy="14" r="2"/></svg>
+          </div>
+          <h3>Somatic Movement Therapy</h3>
+          <p>Therapeutic movement that meets held tension in the body itself — and gently rewires the patterns stored there.</p>
+          <span class="service__line" aria-hidden="true"></span>
+        </article>
+
+        <article class="service" data-reveal="up" data-tilt data-cursor="hover" data-reveal-delay="1">
+          <span class="service__num">03</span>
+          <div class="service__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="24" cy="14" r="5"/><path d="M24 19v10M24 29l-9 13M24 29l9 13M14 24h20"/></svg>
+          </div>
+          <h3>Yoga &amp; Meditation</h3>
+          <p>Yoga Alliance–accredited teaching and an un-mystical, practical meditation for the life you actually live.</p>
+          <span class="service__line" aria-hidden="true"></span>
+        </article>
+
+        <article class="service" data-reveal="up" data-tilt data-cursor="hover" data-reveal-delay="0">
+          <span class="service__num">04</span>
+          <div class="service__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M24 8c-7 0-11 5-11 11 0 5 3 8 3 12h16c0-4 3-7 3-12 0-6-4-11-11-11Z"/><path d="M20 39c0 2 2 3 4 3s4-1 4-3"/></svg>
+          </div>
+          <h3>Mind–Body Coaching</h3>
+          <p>One-to-one work across stress, habits and identity — the bridge between understanding yourself and changing your life.</p>
+          <span class="service__line" aria-hidden="true"></span>
+        </article>
+
+        <article class="service" data-reveal="up" data-tilt data-cursor="hover" data-reveal-delay="1">
+          <span class="service__num">05</span>
+          <div class="service__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M34 8H18l-4 6v26h20V14l-4-6Z"/><path d="M14 14h20M24 20v14M19 27h10"/></svg>
+          </div>
+          <h3>Nutrition &amp; Supplementation</h3>
+          <p>Primal-nutrition principles and professional-grade Fullscript supplements, delivered at a discount to the UK, USA &amp; Canada.</p>
+          <span class="service__line" aria-hidden="true"></span>
+        </article>
+
+        <article class="service" data-reveal="up" data-tilt data-cursor="hover" data-reveal-delay="2">
+          <span class="service__num">06</span>
+          <div class="service__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="24" cy="18" r="9"/><path d="M8 42c2-8 8-12 16-12s14 4 16 12"/></svg>
+          </div>
+          <h3>Trauma-Informed Community</h3>
+          <p>Connection, events and resources through Greenheart — a community built on safety, trust and shared humanity.</p>
+          <span class="service__line" aria-hidden="true"></span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== JOURNEY ===== -->
+  <section class="section journey" id="journey">
+    <div class="journey__glow" aria-hidden="true"></div>
+    <div class="section__inner">
+      <header class="section__head">
+        <p class="eyebrow" data-reveal="up"><span class="eyebrow__num">03</span> The Journey</p>
+        <h2 class="h2" data-reveal="up">From first breath<br /><em>to lasting change.</em></h2>
+      </header>
+
+      <ol class="steps">
+        <li class="step" data-reveal="up">
+          <span class="step__num">01</span>
+          <h3>Begin</h3>
+          <p>A free thirty-minute conversation. No commitment — just a clear sense of whether this work is right for you.</p>
+        </li>
+        <li class="step" data-reveal="up" data-reveal-delay="1">
+          <span class="step__num">02</span>
+          <h3>Investigate</h3>
+          <p>A full case history and holistic lab testing, including organic acids analysis where it serves you.</p>
+        </li>
+        <li class="step" data-reveal="up" data-reveal-delay="2">
+          <span class="step__num">03</span>
+          <h3>Understand</h3>
+          <p>Your own biopsychosocial map — what is happening, why it is happening, and what your body is asking for.</p>
+        </li>
+        <li class="step" data-reveal="up" data-reveal-delay="3">
+          <span class="step__num">04</span>
+          <h3>Restore</h3>
+          <p>A living plan across nutrition, movement, meditation and coaching — adjusted as your system responds.</p>
+        </li>
+      </ol>
+
+      <div class="journey__cta" data-reveal="up">
+        <a class="btn btn--gold magnetic" href="https://calendly.com/gmsoulfood" target="_blank" rel="noopener" data-cursor="hover">
+          <span class="btn__label">Take the first step</span>
+          <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SUPPLEMENTS BAND ===== -->
+  <section class="band" id="supplements">
+    <div class="band__bg" data-parallax-img="0.15" aria-hidden="true"></div>
+    <div class="band__veil" aria-hidden="true"></div>
+    <div class="section__inner band__inner">
+      <p class="eyebrow eyebrow--light" data-reveal="up">Fullscript Dispensary</p>
+      <h2 class="h2 h2--light" data-reveal="up">Nature's pharmacy,<br /><em>prescribed with precision.</em></h2>
+      <p class="lead lead--light band__sub" data-reveal="up">
+        Professional-grade supplements from a practitioner you already know.
+        A direct, discounted ordering service — shipped across the
+        <strong>United Kingdom, United States and Canada</strong>.
+      </p>
+      <div data-reveal="up">
+        <a class="btn btn--gold magnetic" href="https://us.fullscript.com/welcome/gmonks" target="_blank" rel="noopener" data-cursor="hover">
+          <span class="btn__label">Open the Fullscript store</span>
+          <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUOTE ===== -->
+  <section class="section quote-section">
+    <div class="section__inner quote-section__inner">
+      <span class="quote-section__mark" aria-hidden="true">✦</span>
+      <blockquote class="pull-quote" data-reveal="text">
+        Health is not the absence of symptoms. It is the full
+        expression of the person you were always meant to be.
+      </blockquote>
+      <p class="quote-section__cite" data-reveal="up">— The GlenMonks philosophy</p>
+    </div>
+  </section>
+
+  <!-- ===== LIBRARY ===== -->
+  <section class="section library" id="library">
+    <div class="section__inner">
+      <header class="section__head">
+        <p class="eyebrow" data-reveal="up"><span class="eyebrow__num">04</span> The Library</p>
+        <h2 class="h2" data-reveal="up">Words, free.<br /><em>Take them with you.</em></h2>
+        <p class="lead section__head-sub" data-reveal="up">
+          Publications and guides written from the practice — every one of them complimentary.
+        </p>
+      </header>
+
+      <div class="resources">
+        <a class="resource" href="https://glenmonks.com/wp-content/uploads/2025/04/THE-WILDLIFE-Emotional-Survival-Kit.pdf" target="_blank" rel="noopener" data-reveal="up" data-cursor="hover">
+          <div class="resource__top">
+            <span class="resource__tag">Free Course</span>
+            <span class="resource__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+          </div>
+          <h3>The Wildlife — Emotional Survival Kit</h3>
+          <p>A practical field guide for moving through difficult emotion and coming out the other side intact.</p>
+          <span class="resource__meta">PDF · 2025</span>
+        </a>
+
+        <a class="resource" href="https://glenmonks.com/wp-content/uploads/2023/12/Good-Mood-Food-Mag-GM.pdf" target="_blank" rel="noopener" data-reveal="up" data-reveal-delay="1" data-cursor="hover">
+          <div class="resource__top">
+            <span class="resource__tag">Magazine</span>
+            <span class="resource__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+          </div>
+          <h3>Good Mood Food</h3>
+          <p>What to eat for a steadier mind — the connection between the plate and the way you think, made edible.</p>
+          <span class="resource__meta">PDF · Download</span>
+        </a>
+
+        <a class="resource" href="https://d1fdloi71mui9q.cloudfront.net/SZlYhbu7TQ2tulJCoqvF_Mind%20Body%20Matters.pdf" target="_blank" rel="noopener" data-reveal="up" data-reveal-delay="2" data-cursor="hover">
+          <div class="resource__top">
+            <span class="resource__tag">Publication</span>
+            <span class="resource__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+          </div>
+          <h3>Mind Body Matters</h3>
+          <p>The flagship publication — the research, reasoning and stories behind the biopsychosocial approach.</p>
+          <span class="resource__meta">PDF · Download</span>
+        </a>
+
+        <a class="resource" href="https://glenmonks.com/wp-content/uploads/2023/08/Compact-Meditation-is-NOT-what-you-think.pdf" target="_blank" rel="noopener" data-reveal="up" data-reveal-delay="0" data-cursor="hover">
+          <div class="resource__top">
+            <span class="resource__tag">Guide</span>
+            <span class="resource__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+          </div>
+          <h3>Meditation Is Not What You Think</h3>
+          <p>A compact guide that dismantles the myths and hands you a practice that actually fits your day.</p>
+          <span class="resource__meta">PDF · Compact Ed.</span>
+        </a>
+
+        <a class="resource resource--wide" href="https://www.greenheartcommunity.org/" target="_blank" rel="noopener" data-reveal="up" data-cursor="hover">
+          <div class="resource__top">
+            <span class="resource__tag">Community</span>
+            <span class="resource__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+          </div>
+          <h3>Greenheart — Trauma-Informed Community</h3>
+          <p>Healing does not happen in isolation. Explore the wider community, its gatherings and its support.</p>
+          <span class="resource__meta">greenheartcommunity.org</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="section contact" id="contact">
+    <div class="contact__glow" aria-hidden="true"></div>
+    <div class="section__inner">
+      <div class="contact__grid">
+        <div class="contact__main">
+          <p class="eyebrow" data-reveal="up"><span class="eyebrow__num">05</span> Begin</p>
+          <h2 class="h2" data-reveal="up">Your first session<br /><em>is on me.</em></h2>
+          <p class="lead" data-reveal="up">
+            Thirty minutes, freely given. Tell me where you are — we will leave
+            you with a clearer picture and, if you want one, a plan.
+          </p>
+          <div class="contact__actions" data-reveal="up">
+            <a class="btn btn--gold magnetic" href="https://calendly.com/gmsoulfood" target="_blank" rel="noopener" data-cursor="hover">
+              <span class="btn__label">Schedule on Calendly</span>
+              <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn--ghost magnetic" href="mailto:gmsoulfood@gmail.com" data-cursor="hover">
+              <span class="btn__label">gmsoulfood@gmail.com</span>
+            </a>
+          </div>
+          <div class="contact__socials" data-reveal="up">
+            <a href="https://www.instagram.com/mind_body_matters/" target="_blank" rel="noopener" aria-label="Instagram" data-cursor="hover">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://www.facebook.com/glenmonksmindbodymatters" target="_blank" rel="noopener" aria-label="Facebook" data-cursor="hover">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 8h2V5h-2c-2.2 0-3.5 1.4-3.5 3.6V11H8v3h2.5v7h3v-7H16l.5-3h-3V8.8c0-.6.3-.8 1-.8Z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/glen-monks-442bb215/" target="_blank" rel="noopener" aria-label="LinkedIn" data-cursor="hover">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 10v7M7 7v.01M11 17v-4a2 2 0 0 1 4 0v4M11 10v7"/></svg>
+            </a>
+            <a href="https://www.youtube.com/channel/UCbBExzbKyrAyxzKFDK4moPA" target="_blank" rel="noopener" aria-label="YouTube" data-cursor="hover">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="6" width="18" height="12" rx="4"/><path d="m11 9.5 4 2.5-4 2.5v-5Z" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://linktr.ee/mind_body_matters" target="_blank" rel="noopener" aria-label="Linktree" data-cursor="hover">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v18M7 8l5-5 5 5M5 13l7 8 7-8"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <aside class="contact__card" data-reveal="up">
+          <div class="contact__card-row">
+            <span class="contact__card-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              Opening Hours
+            </span>
+            <ul class="hours">
+              <li><span>Mon – Fri</span><i></i><b>10:00 – 19:00</b></li>
+              <li><span>Saturday</span><i></i><b>Half day</b></li>
+              <li><span>Sunday</span><i></i><b class="is-off">Offline</b></li>
+            </ul>
+          </div>
+          <div class="contact__card-row">
+            <span class="contact__card-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>
+              Telephone
+            </span>
+            <a href="tel:+447951138579" class="contact__card-value" data-cursor="hover">+44 7951 138 579</a>
+          </div>
+          <div class="contact__card-row">
+            <span class="contact__card-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
+              Email
+            </span>
+            <a href="mailto:gmsoulfood@gmail.com" class="contact__card-value" data-cursor="hover">gmsoulfood@gmail.com</a>
+          </div>
+          <div class="contact__card-row">
+            <span class="contact__card-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              Practice
+            </span>
+            <span class="contact__card-value">11 Long Close, Bessacarr<br />Doncaster, United Kingdom</span>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer__giant" aria-hidden="true">
+    <span data-footer-text>Mind&nbsp;Body</span> <em data-footer-text>Break&nbsp;Free</em>
+  </div>
+  <div class="section__inner footer__bar">
+    <span>© <span id="year">2026</span> Glen Monks · Mind Body Matters</span>
+    <span class="footer__loc">Doncaster · England</span>
+    <a href="#top" class="footer__top" data-cursor="hover">Back to top ↑</a>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

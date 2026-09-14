@@ -1,0 +1,6 @@
+.DS_Store
+*.profraw
+Thumbs.db
+.vscode/
+.idea/
+node_modules/
