@@ -60,6 +60,7 @@
   function currentTheme() {
     return root.getAttribute("data-theme") === "light" ? "light" : "dark";
   }
+  // Dark is the default — no OS preference following
   function applyTheme(theme) {
     root.setAttribute("data-theme", theme);
     if (themeToggle) {
@@ -77,14 +78,6 @@
       try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
     });
   }
-  // Follow the OS preference until the visitor makes an explicit choice
-  try {
-    if (!localStorage.getItem(THEME_KEY)) {
-      window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", (e) => {
-        applyTheme(e.matches ? "light" : "dark");
-      });
-    }
-  } catch (e) {}
 
   /* ----------------------------------------------------------
      2. PRELOADER

@@ -3,20 +3,15 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#edf1e5" />
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a1510" />
+<meta name="theme-color" content="#0a1510" />
 <script>
-  /* Set theme before first paint to avoid any flash */
+  /* Dark is the default; honour a saved explicit choice only */
   (function () {
+    var theme = "dark";
     try {
-      var saved = localStorage.getItem("gm-theme");
-      var theme = saved === "light" || saved === "dark"
-        ? saved
-        : (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
-      document.documentElement.setAttribute("data-theme", theme);
-    } catch (e) {
-      document.documentElement.setAttribute("data-theme", "dark");
-    }
+      if (localStorage.getItem("gm-theme") === "light") theme = "light";
+    } catch (e) {}
+    document.documentElement.setAttribute("data-theme", theme);
   })();
 </script>
 <title>Glen Monks — Functional Therapist · Mind, Body, Break Free</title>
@@ -42,10 +37,6 @@
 <!-- ===== Preloader ===== -->
 <div class="preloader" id="preloader" aria-hidden="true">
   <div class="preloader__inner">
-    <div class="preloader__emblem" aria-hidden="true">
-      <img src="assets/images/logo-emblem.png" alt="" width="140" height="140" />
-      <span class="preloader__emblem-halo"></span>
-    </div>
     <p class="preloader__eyebrow">Glen Monks</p>
     <h2 class="preloader__word" aria-hidden="true">
       <span>b</span><span>r</span><span>e</span><span>a</span><span>k</span><span>&nbsp;</span><span class="italic">free.</span>
@@ -60,9 +51,6 @@
 <!-- ===== Navigation ===== -->
 <header class="nav" id="nav">
   <a href="#top" class="nav__brand" data-cursor="hover" aria-label="Glen Monks home">
-    <span class="nav__mark" aria-hidden="true">
-      <img class="nav__logo" src="assets/images/logo-emblem.png" alt="" width="44" height="44" />
-    </span>
     <span class="nav__name">Glen Monks<small>Functional Therapist</small></span>
   </a>
   <nav class="nav__links" aria-label="Primary">
