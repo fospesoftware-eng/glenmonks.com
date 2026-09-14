@@ -43,10 +43,48 @@
     words.forEach((w) => {
       const s = document.createElement("span");
       s.className = "w";
-      s.textContent = w + " ";
+      /* Spacing is provided by .w { margin-right } — a trailing space
+         inside an inline-block box collapses and glues words together */
+      s.textContent = w;
       quote.appendChild(s);
     });
   }
+
+  /* ----------------------------------------------------------
+     1b. THEME TOGGLE — light / dark, persisted
+     ---------------------------------------------------------- */
+  const THEME_KEY = "gm-theme";
+  const themeToggle = document.getElementById("themeToggle");
+  const root = document.documentElement;
+
+  function currentTheme() {
+    return root.getAttribute("data-theme") === "light" ? "light" : "dark";
+  }
+  function applyTheme(theme) {
+    root.setAttribute("data-theme", theme);
+    if (themeToggle) {
+      themeToggle.setAttribute("aria-label", theme === "dark" ? "Switch to light mode" : "Switch to dark mode");
+      themeToggle.setAttribute("title", theme === "dark" ? "Switch to light mode" : "Switch to dark mode");
+    }
+    const meta = document.querySelector('meta[name="theme-color"]:not([media])');
+    if (meta) meta.setAttribute("content", theme === "light" ? "#edf1e5" : "#0a1510");
+  }
+  applyTheme(currentTheme());
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      const next = currentTheme() === "dark" ? "light" : "dark";
+      applyTheme(next);
+      try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
+    });
+  }
+  // Follow the OS preference until the visitor makes an explicit choice
+  try {
+    if (!localStorage.getItem(THEME_KEY)) {
+      window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", (e) => {
+        applyTheme(e.matches ? "light" : "dark");
+      });
+    }
+  } catch (e) {}
 
   /* ----------------------------------------------------------
      2. PRELOADER

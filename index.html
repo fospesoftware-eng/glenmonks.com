@@ -3,6 +3,22 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#edf1e5" />
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a1510" />
+<script>
+  /* Set theme before first paint to avoid any flash */
+  (function () {
+    try {
+      var saved = localStorage.getItem("gm-theme");
+      var theme = saved === "light" || saved === "dark"
+        ? saved
+        : (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) {
+      document.documentElement.setAttribute("data-theme", "dark");
+    }
+  })();
+</script>
 <title>Glen Monks — Functional Therapist · Mind, Body, Break Free</title>
 <meta name="description" content="Glen Monks is a functional therapist and mind-body coach in Doncaster, England. Holistic testing across the biological, psychological and social dimensions of your life — with yoga, meditation, somatic movement, nutrition and practitioner-grade supplements." />
 <meta property="og:title" content="Glen Monks — Functional Therapist" />
@@ -14,7 +30,7 @@
 <link rel="apple-touch-icon" href="assets/images/logo-icon.png" />
 <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
-<body data-theme="midnight">
+<body>
 
 <!-- ===== Grain / atmosphere overlays ===== -->
 <div class="grain" aria-hidden="true"></div>
@@ -57,6 +73,10 @@
     <a href="#contact" data-cursor="hover"><span>Contact</span></a>
   </nav>
   <div class="nav__right">
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" title="Toggle light / dark theme" data-cursor="hover">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5 8.5 8.5 0 1 0 20.5 14.5Z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 4.9l-1.7 1.7M6.6 17.4l-1.7 1.7"/></svg>
+    </button>
     <a class="btn btn--gold btn--sm magnetic" href="https://calendly.com/gmsoulfood" target="_blank" rel="noopener" data-cursor="hover">
       <span class="btn__label">Book a free call</span>
     </a>
