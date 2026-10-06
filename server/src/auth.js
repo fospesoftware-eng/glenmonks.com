@@ -32,27 +32,27 @@ function parseCookies(req) {
   return out;
 }
 
-export function createSession(userId) {
+export async function createSession(userId) {
   const token = randomBytes(32).toString("hex");
   const expires = new Date(Date.now() + SESSION_DAYS * 864e5).toISOString();
-  db.prepare("INSERT INTO sessions (token, user_id, expires_at) VALUES (?, ?, ?)")
+  await db.prepare("INSERT INTO sessions (token, user_id, expires_at) VALUES ($1, $2, $3)")
     .run(token, userId, expires);
   return { token, expires };
 }
 
-export function getUserFromRequest(req) {
+export async function getUserFromRequest(req) {
   const token = parseCookies(req)[SESSION_COOKIE];
   if (!token) return null;
-  const row = db.prepare(
+  const row = await db.prepare(
     `SELECT u.id, u.username FROM sessions s
      JOIN users u ON u.id = s.user_id
-     WHERE s.token = ? AND s.expires_at > datetime('now')`
+     WHERE s.token = $1 AND s.expires_at > now()`
   ).get(token);
   return row || null;
 }
 
-export const requireAuth = (req, res, next) => {
-  const user = getUserFromRequest(req);
+export const requireAuth = async (req, res, next) => {
+  const user = await getUserFromRequest(req);
   if (!user) return res.status(401).json({ error: "Not signed in" });
   req.user = user;
   next();
@@ -60,20 +60,20 @@ export const requireAuth = (req, res, next) => {
 
 export const authRouter = Router();
 
-authRouter.post("/login", (req, res) => {
+authRouter.post("/login", async (req, res) => {
   const ip = clientKey(req);
   if (rateLimited(ip)) return res.status(429).json({ error: "Too many attempts — try again in 15 minutes." });
 
   const username = String(req.body?.username || "").trim().slice(0, 64);
   const password = String(req.body?.password || "").slice(0, 256);
-  const user = db.prepare("SELECT * FROM users WHERE username = ?").get(username);
+  const user = await db.prepare("SELECT * FROM users WHERE username = $1").get(username);
 
   if (!user || !verifyPassword(password, user.pass_hash)) {
     recordFailure(ip);
     return res.status(401).json({ error: "Invalid username or password" });
   }
   clearFailures(ip);
-  const { token, expires } = createSession(user.id);
+  const { token, expires } = await createSession(user.id);
   res.cookie(SESSION_COOKIE, token, {
     httpOnly: true, sameSite: "lax", path: "/",
     expires: new Date(expires), maxAge: SESSION_DAYS * 864e5
@@ -81,9 +81,9 @@ authRouter.post("/login", (req, res) => {
   res.json({ ok: true, user: { id: user.id, username: user.username } });
 });
 
-authRouter.post("/logout", (req, res) => {
+authRouter.post("/logout", async (req, res) => {
   const token = parseCookies(req)[SESSION_COOKIE];
-  if (token) db.prepare("DELETE FROM sessions WHERE token = ?").run(token);
+  if (token) await db.prepare("DELETE FROM sessions WHERE token = $1").run(token);
   res.clearCookie(SESSION_COOKIE, { path: "/" });
   res.json({ ok: true });
 });
@@ -92,17 +92,17 @@ authRouter.get("/me", requireAuth, (req, res) => {
   res.json({ user: { id: req.user.id, username: req.user.username } });
 });
 
-authRouter.put("/password", requireAuth, (req, res) => {
+authRouter.put("/password", requireAuth, async (req, res) => {
   const current = String(req.body?.currentPassword || "");
   const next = String(req.body?.newPassword || "");
   if (next.length < 10) return res.status(400).json({ error: "New password must be at least 10 characters" });
-  const user = db.prepare("SELECT * FROM users WHERE id = ?").get(req.user.id);
+  const user = await db.prepare("SELECT * FROM users WHERE id = $1").get(req.user.id);
   if (!verifyPassword(current, user.pass_hash)) {
     return res.status(400).json({ error: "Current password is incorrect" });
   }
-  db.prepare("UPDATE users SET pass_hash = ? WHERE id = ?").run(hashPassword(next), req.user.id);
+  await db.prepare("UPDATE users SET pass_hash = $1 WHERE id = $2").run(hashPassword(next), req.user.id);
   // Sign out everywhere after a password change
-  db.prepare("DELETE FROM sessions WHERE user_id = ?").run(req.user.id);
+  await db.prepare("DELETE FROM sessions WHERE user_id = $1").run(req.user.id);
   res.clearCookie(SESSION_COOKIE, { path: "/" });
   res.json({ ok: true, reauth: true });
 });

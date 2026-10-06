@@ -15,17 +15,17 @@ export const COLLECTIONS = {
   resources: { table: "resources", columns: ["tag", "title", "body", "meta", "url", "wide"], orderBy: "pos" }
 };
 
-export function listCollection(name) {
+export async function listCollection(name) {
   const c = COLLECTIONS[name];
   if (!c) throw new Error("Unknown collection");
-  return db.prepare(`SELECT * FROM ${c.table} ORDER BY ${c.orderBy}, id`).all()
-    .map((row) => ({ ...row, wide: !!row.wide }));
+  const rows = await db.prepare(`SELECT * FROM ${c.table} ORDER BY ${c.orderBy}, id`).all();
+  return rows.map((row) => ({ ...row, wide: !!row.wide }));
 }
 
-export function buildContent() {
+export async function buildContent() {
   const out = {};
-  for (const key of KV_KEYS) out[key] = getKv(key, {});
-  for (const name of Object.keys(COLLECTIONS)) out[name] = listCollection(name);
+  for (const key of KV_KEYS) out[key] = await getKv(key, {});
+  for (const name of Object.keys(COLLECTIONS)) out[name] = await listCollection(name);
   return out;
 }
 
@@ -34,13 +34,13 @@ export function mediaUrl(row) {
 }
 
 /* Generate/ensure a URL-safe unique slug */
-export function slugify(text, exceptId = -1) {
+export async function slugify(text, exceptId = -1) {
   const base = String(text || "").toLowerCase()
     .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "")
     .slice(0, 80) || "post";
   let slug = base;
   let n = 1;
-  while (db.prepare("SELECT id FROM posts WHERE slug = ? AND id != ?").get(slug, exceptId)) {
+  while (await db.prepare("SELECT id FROM posts WHERE slug = $1 AND id != $2").get(slug, exceptId)) {
     slug = `${base}-${++n}`;
   }
   return slug;

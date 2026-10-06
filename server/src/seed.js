@@ -2,7 +2,7 @@
    Seed data — the site's current copy, captured from index.html
    Runs on first boot; `npm run seed` forces a content reset
    ============================================================ */
-import { db, setKv } from "./db.js";
+import { pool } from "./db.js";
 import { hashPassword } from "./passwords.js";
 
 const content = {
@@ -140,42 +140,65 @@ const resources = [
   { tag: "Community",    title: "Greenheart — Trauma-Informed Community", body: "Healing does not happen in isolation. Explore the wider community, its gatherings and its support.", meta: "greenheartcommunity.org", url: "https://www.greenheartcommunity.org/", wide: 1 }
 ];
 
-export function seedDatabase({ force = false } = {}) {
-  db.exec("BEGIN");
+export async function seedDatabase({ force = false } = {}) {
+  const client = await pool.connect();
   try {
+    await client.query("BEGIN");
+
     if (force) {
-      db.exec("DELETE FROM sessions; DELETE FROM posts; DELETE FROM resources; DELETE FROM steps; DELETE FROM services; DELETE FROM pillars; DELETE FROM kv;");
-      const users = db.prepare("SELECT COUNT(*) AS n FROM users").get().n;
+      await client.query(
+        "DELETE FROM sessions; DELETE FROM posts; DELETE FROM resources; DELETE FROM steps; DELETE FROM services; DELETE FROM pillars; DELETE FROM kv;"
+      );
+      const users = (await client.query("SELECT COUNT(*)::int AS n FROM users")).rows[0].n;
       if (users === 0) {
-        db.prepare("INSERT INTO users (username, pass_hash) VALUES (?, ?)")
-          .run("admin", hashPassword("glenmonks2026"));
+        await client.query(
+          "INSERT INTO users (username, pass_hash) VALUES ($1, $2)",
+          ["admin", hashPassword("glenmonks2026")]
+        );
       }
     } else {
-      db.prepare("INSERT OR IGNORE INTO users (username, pass_hash) VALUES (?, ?)")
-        .run("admin", hashPassword("glenmonks2026"));
+      await client.query(
+        "INSERT INTO users (username, pass_hash) VALUES ($1, $2) ON CONFLICT (username) DO NOTHING",
+        ["admin", hashPassword("glenmonks2026")]
+      );
     }
 
-    for (const [key, value] of Object.entries(content)) setKv(key, value);
+    /* KV section copy (upserts are fine inside the transaction) */
+    for (const [key, value] of Object.entries(content)) {
+      await client.query(
+        `INSERT INTO kv(key, value) VALUES($1, $2) ON CONFLICT(key) DO UPDATE SET value = EXCLUDED.value`,
+        [key, JSON.stringify(value)]
+      );
+    }
 
-    const insCollection = (table, rows) => {
+    const insCollection = async (table, rows) => {
       const cols = Object.keys(rows[0]);
-      const placeholders = ["?", ...cols.map(() => "?")].join(", ");
-      const insert = db.prepare(`INSERT INTO ${table} (pos, ${cols.join(", ")}) VALUES (${placeholders})`);
-      rows.forEach((row, i) => insert.run(i, ...Object.values(row)));
+      const placeholders = ["$1", ...cols.map((_, i) => `$${i + 2}`)].join(", ");
+      const sql = `INSERT INTO ${table} (pos, ${cols.join(", ")}) VALUES (${placeholders})`;
+      for (let i = 0; i < rows.length; i++) {
+        await client.query(sql, [i, ...cols.map((k) => rows[i][k])]);
+      }
     };
-    if (db.prepare("SELECT COUNT(*) AS n FROM pillars").get().n === 0)   insCollection("pillars", pillars);
-    if (db.prepare("SELECT COUNT(*) AS n FROM services").get().n === 0)  insCollection("services", services);
-    if (db.prepare("SELECT COUNT(*) AS n FROM steps").get().n === 0)     insCollection("steps", steps);
-    if (db.prepare("SELECT COUNT(*) AS n FROM resources").get().n === 0) insCollection("resources", resources);
-    db.exec("COMMIT");
+    const count = async (table) =>
+      (await client.query(`SELECT COUNT(*)::int AS n FROM ${table}`)).rows[0].n;
+
+    if ((await count("pillars")) === 0)   await insCollection("pillars", pillars);
+    if ((await count("services")) === 0)  await insCollection("services", services);
+    if ((await count("steps")) === 0)     await insCollection("steps", steps);
+    if ((await count("resources")) === 0) await insCollection("resources", resources);
+
+    await client.query("COMMIT");
   } catch (err) {
-    db.exec("ROLLBACK");
+    await client.query("ROLLBACK");
     throw err;
+  } finally {
+    client.release();
   }
 }
 
 /* Allow `npm run seed` to force-reset content (users/enquiries/media kept) */
 if (process.argv[1] && process.argv[1].endsWith("seed.js") && process.argv.includes("--force")) {
-  seedDatabase({ force: true });
-  console.log("✓ Content re-seeded (admin password reset to the default)");
+  seedDatabase({ force: true })
+    .then(() => console.log("✓ Content re-seeded (admin password reset to the default)"))
+    .catch((e) => { console.error(e); process.exit(1); });
 }

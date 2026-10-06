@@ -11,15 +11,15 @@ export const publicRouter = Router();
 publicRouter.get("/health", (_req, res) => res.json({ ok: true }));
 
 /* Everything the homepage needs in one round trip */
-publicRouter.get("/content", (_req, res) => {
+publicRouter.get("/content", async (_req, res) => {
   res.set("Cache-Control", "no-store");
-  res.json(buildContent());
+  res.json(await buildContent());
 });
 
-function decoratePost(row) {
+async function decoratePost(row) {
   if (!row) return null;
   const cover = row.cover_media_id
-    ? db.prepare("SELECT * FROM media WHERE id = ?").get(row.cover_media_id)
+    ? await db.prepare("SELECT * FROM media WHERE id = $1").get(row.cover_media_id)
     : null;
   return {
     id: row.id,
@@ -37,31 +37,36 @@ function decoratePost(row) {
   };
 }
 
-publicRouter.get("/posts", (req, res) => {
+publicRouter.get("/posts", async (req, res) => {
   const limit = Math.min(parseInt(req.query.limit, 10) || 12, 50);
-  const rows = db.prepare(
+  const rows = await db.prepare(
     `SELECT * FROM posts WHERE status = 'published'
-     AND published_at IS NOT NULL AND published_at <= datetime('now')
-     ORDER BY published_at DESC, id DESC LIMIT ?`
+     AND published_at IS NOT NULL AND published_at <= now()
+     ORDER BY published_at DESC, id DESC LIMIT $1`
   ).all(limit);
-  const posts = rows.map(decoratePost).map(({ body, bodyHtml, ...card }) => card);
+  const posts = [];
+  for (const row of rows) {
+    const decorated = await decoratePost(row);
+    const { body, bodyHtml, ...card } = decorated;
+    posts.push(card);
+  }
   res.json({ posts });
 });
 
-publicRouter.get("/posts/:slug", (req, res) => {
-  const row = db.prepare(
-    `SELECT * FROM posts WHERE slug = ? AND status = 'published'
-     AND published_at IS NOT NULL AND published_at <= datetime('now')`
+publicRouter.get("/posts/:slug", async (req, res) => {
+  const row = await db.prepare(
+    `SELECT * FROM posts WHERE slug = $1 AND status = 'published'
+     AND published_at IS NOT NULL AND published_at <= now()`
   ).get(req.params.slug);
   if (!row) return res.status(404).json({ error: "Post not found" });
-  res.json({ post: decoratePost(row) });
+  res.json({ post: await decoratePost(row) });
 });
 
 /* ---------- Contact form → enquiries ---------- */
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const contactIps = new Map();
 
-publicRouter.post("/contact", (req, res) => {
+publicRouter.post("/contact", async (req, res) => {
   // Honeypot: bots fill hidden "company" field; humans never see it
   if (req.body?.company) return res.json({ ok: true });
 
@@ -81,7 +86,8 @@ publicRouter.post("/contact", (req, res) => {
   if (message.length < 10) errors.push("Please add a little more detail to your message.");
   if (errors.length) return res.status(400).json({ error: errors.join(" ") });
 
-  db.prepare("INSERT INTO enquiries (name, email, message) VALUES (?, ?, ?)").run(name, email, message);
+  await db.prepare("INSERT INTO enquiries (name, email, message) VALUES ($1, $2, $3)")
+    .run(name, email, message);
   contactIps.set(ip, Date.now());
   res.json({ ok: true, message: "Thank you — your message has reached Glen. He replies personally, usually within a day or two." });
 });

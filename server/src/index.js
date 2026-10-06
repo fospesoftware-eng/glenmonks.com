@@ -7,7 +7,7 @@
    ============================================================ */
 import express from "express";
 import { join } from "node:path";
-import { SERVER_ROOT, UPLOADS_DIR } from "./db.js";
+import { SERVER_ROOT, UPLOADS_DIR, initDb } from "./db.js";
 import { publicRouter } from "./api-public.js";
 import { adminRouter } from "./api-admin.js";
 import { authRouter } from "./auth.js";
@@ -53,9 +53,17 @@ app.use((err, _req, res, _next) => {
   res.status(err.status || 400).json({ error: err.message || "Server error" });
 });
 
-app.listen(PORT, () => {
-  console.log(`\n  Glen Monks CMS running`);
-  console.log(`  → Website:  http://localhost:${PORT}/`);
-  console.log(`  → Admin:    http://localhost:${PORT}/admin`);
-  console.log(`  Default login: admin / glenmonks2026 (change it in Settings)\n`);
-});
+/* Connect to Postgres, build schema and seed before serving traffic */
+initDb()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`\n  Glen Monks CMS running (PostgreSQL)`);
+      console.log(`  → Website:  http://localhost:${PORT}/`);
+      console.log(`  → Admin:    http://localhost:${PORT}/admin`);
+      console.log(`  Default login: admin / glenmonks2026 (change it in Settings)\n`);
+    });
+  })
+  .catch((err) => {
+    console.error("Failed to initialise database:", err.message);
+    process.exit(1);
+  });
