@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0a1510" />
+<script>
+  (function () {
+    var theme = "dark";
+    try { if (localStorage.getItem("gm-theme") === "light") theme = "light"; } catch (e) {}
+    document.documentElement.setAttribute("data-theme", theme);
+  })();
+</script>
+<title>The Journal — Glen Monks</title>
+<meta name="description" content="Articles, guides and notes on functional therapy, mind-body coaching, nutrition and holistic health from Glen Monks." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/png" href="assets/images/logo-icon.png" />
+<link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="scroll-progress" aria-hidden="true"><span></span></div>
+<div class="cursor" aria-hidden="true"><div class="cursor__dot"></div><div class="cursor__ring"></div></div>
+
+<!-- Navigation (mirrors the homepage) -->
+<header class="nav" id="nav">
+  <a href="index.html#top" class="nav__brand" data-cursor="hover" aria-label="Glen Monks home">
+    <span class="nav__name">Glen Monks<small>Functional Therapist</small></span>
+  </a>
+  <nav class="nav__links" aria-label="Primary">
+    <a href="index.html#philosophy" data-cursor="hover"><span>Philosophy</span></a>
+    <a href="index.html#practice" data-cursor="hover"><span>Practice</span></a>
+    <a href="index.html#journey" data-cursor="hover"><span>Journey</span></a>
+    <a href="index.html#library" data-cursor="hover"><span>Library</span></a>
+    <a href="blog.html" data-cursor="hover"><span>Journal</span></a>
+    <a href="index.html#contact" data-cursor="hover"><span>Contact</span></a>
+  </nav>
+  <div class="nav__right">
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" title="Toggle light / dark theme" data-cursor="hover">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5 8.5 8.5 0 1 0 20.5 14.5Z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 4.9l-1.7 1.7M6.6 17.4l-1.7 1.7"/></svg>
+    </button>
+    <a class="btn btn--gold btn--sm magnetic" href="https://calendly.com/gmsoulfood" target="_blank" rel="noopener" data-cursor="hover" data-cms-href="site.calendlyUrl">
+      <span class="btn__label">Book a free call</span>
+    </a>
+    <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false" data-cursor="hover">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <nav>
+    <a href="index.html#philosophy"><em>01</em> Philosophy</a>
+    <a href="index.html#practice"><em>02</em> Practice</a>
+    <a href="index.html#journey"><em>03</em> Journey</a>
+    <a href="index.html#library"><em>04</em> Library</a>
+    <a href="blog.html"><em>05</em> Journal</a>
+    <a href="index.html#contact"><em>06</em> Contact</a>
+  </nav>
+  <a class="btn btn--gold" href="https://calendly.com/gmsoulfood" target="_blank" rel="noopener" data-cms-href="site.calendlyUrl"><span class="btn__label">Book a free 30-minute call</span></a>
+  <div class="mobile-menu__foot">
+    <a href="mailto:gmsoulfood@gmail.com" data-cms-mailto="site.email">gmsoulfood@gmail.com</a>
+    <span data-cms-text="site.location">Doncaster · England</span>
+  </div>
+</div>
+
+<main id="top">
+  <section class="section journal">
+    <div class="section__inner" id="journalRoot">
+      <p class="muted">Loading…</p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="section__inner footer__bar">
+    <span>© <span id="year">2026</span> <span data-cms-text="site.footerNote">Glen Monks · Mind Body Matters</span></span>
+    <span class="footer__loc"><a href="index.html" style="color:inherit">Back to homepage ↑</a></span>
+  </div>
+</footer>
+
+<script src="assets/js/cms.js"></script>
+<script src="assets/js/blog.js"></script>
+</body>
+</html>

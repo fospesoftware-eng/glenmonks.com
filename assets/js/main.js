@@ -87,16 +87,16 @@
 
   function finishLoading() {
     body.classList.add("is-loaded");
+    body.classList.remove("is-locked");
     window.setTimeout(() => {
       if (preloader) {
         preloader.classList.add("is-done");
-        body.classList.remove("is-locked");
         window.setTimeout(() => preloader.remove(), 1200);
       }
     }, reduceMotion ? 0 : 400);
   }
 
-  if (reduceMotion) {
+  if (reduceMotion || !preloader) {
     if (preloader) preloader.remove();
     finishLoading();
   } else {
