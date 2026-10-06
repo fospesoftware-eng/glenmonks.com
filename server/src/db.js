@@ -3,6 +3,7 @@
    Connects via DATABASE_URL (Replit Postgres provides this) or
    the PGHOST / PGPORT / PGUSER / PGPASSWORD / PGDATABASE env vars.
    ============================================================ */
+import "dotenv/config";
 import pg from "pg";
 import { mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
