@@ -1,0 +1,5 @@
+run = "cd server && npm install && npm start"
+
+[[ports]]
+localPort = 4700
+externalPort = 80
