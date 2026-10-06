@@ -149,13 +149,12 @@ export async function seedDatabase({ force = false } = {}) {
       await client.query(
         "DELETE FROM sessions; DELETE FROM posts; DELETE FROM resources; DELETE FROM steps; DELETE FROM services; DELETE FROM pillars; DELETE FROM kv;"
       );
-      const users = (await client.query("SELECT COUNT(*)::int AS n FROM users")).rows[0].n;
-      if (users === 0) {
-        await client.query(
-          "INSERT INTO users (username, pass_hash) VALUES ($1, $2)",
-          ["admin", hashPassword("glenmonks2026")]
-        );
-      }
+      // Always reset the admin user to the default credentials on --force
+      await client.query(
+        `INSERT INTO users (username, pass_hash) VALUES ($1, $2)
+         ON CONFLICT (username) DO UPDATE SET pass_hash = EXCLUDED.pass_hash`,
+        ["admin", hashPassword("glenmonks2026")]
+      );
     } else {
       await client.query(
         "INSERT INTO users (username, pass_hash) VALUES ($1, $2) ON CONFLICT (username) DO NOTHING",
